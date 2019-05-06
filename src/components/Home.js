@@ -4,15 +4,13 @@ import { Route, withRouter, Link } from 'react-router-dom'
 class Home extends Component {
   render() {
     return(
-      <div className="container">
-      <div className="notification">
-      <h1>Welcome to SoyMates</h1>
-      <p> The app that helps match you to the perfect sushi for YOU. </p>
-      <div className="buttons is-centered">
-      <Link className="button is-primary" to="/login" > Log in </Link>
-      <Link className="button is-primary"  to="/signup">Sign up</Link>
-      </div>
-      </div>
+      <div className="hero is-light">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title">Welcome to SOYMATES</h1>
+            <h3 className="subtitle"> The app that helps match you to the perfect sushi for YOU. </h3>
+          </div>
+        </div>
       </div>
     )
   }

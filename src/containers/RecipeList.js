@@ -18,12 +18,11 @@ export default class RecipeList extends Component {
         displayRecipes: recipeData
       })
     })
-    // console.log(this.state.recipes)
   }
 
   handleSearch = (event) => {
     let newArray = this.state.recipes.filter(recipe => {
-      return recipe.name.toLowerCase().includes(event.target.value.toLowerCase()) || recipe.roll_type.toLowerCase().includes(event.target.value.toLowerCase())
+      return recipe.name.toLowerCase().includes(event.target.value.toLowerCase()) || recipe.roll_type.toLowerCase().includes(event.target.value.toLowerCase()) || recipe.instructions.toLowerCase().includes(event.target.value.toLowerCase())
     })
     this.setState({
       displayRecipes: newArray
@@ -32,11 +31,19 @@ export default class RecipeList extends Component {
 
   render() {
     return(
-      <div className="container">
-      <Search handleSearch={this.handleSearch}/>
+      <div>
+      <div className="hero is-light">
+        <div className="hero-body">
+          <div className="container">
+            know what you want?<Search handleSearch={this.handleSearch}/>
+          </div>
+        </div>
+      </div>
+    <div className="container is-centered">
       {this.state.displayRecipes.map(single_recipe=>
         <RecipeCard recipe={single_recipe} />
       )}
+    </div>
       </div>
     )
   }
