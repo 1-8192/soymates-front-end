@@ -6,6 +6,7 @@ import Home from './components/Home'
 import RecipeList from './containers/RecipeList'
 import Login from './containers/Login'
 import Signup from './containers/Signup'
+import Navbar from './components/Navbar'
 
 class App extends React.Component {
   state = {
@@ -13,11 +14,11 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    if (this.state.currentUser === null && localStorage.getItem !== null) {
-      fetch("http://localhost:3005/current_user", {
+    if (this.state.currentUser === null && localStorage.getItem("token") !== null) {
+      fetch("http://localhost:3005/api/v1/current_user", {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
         }
       })
       .then(response => response.json())
@@ -29,15 +30,14 @@ class App extends React.Component {
     }
   }
 
-  handleLogin = (event, credentials) => {
+  handleLogin = (event, user) => {
     event.preventDefault()
-
-    fetch("http://localhost:3005/login", {
+    fetch("http://localhost:3005/api/v1/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(credentials)
+      body: JSON.stringify({user})
     })
     .then(response => response.json())
     .then(userData => {
@@ -48,25 +48,16 @@ class App extends React.Component {
     })
   }
 
-  handleSignup = (event, credentials) => {
+  handleSignup = (event, user) => {
     event.preventDefault()
 
-    if (credentials.password !== credentials.password_confirmation) {
-      alert("Oops, your passwords do not match!")
-    } else {
-      let newUser = {
-        username: credentials.username,
-        email: credentials.email,
-        password: credentials.password
-      }
-
-      fetch("http://localhost:3005/api/v1/users", {
+      fetch("http://localhost:3005/api/v1/signup", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
         },
-        body: JSON.stringify({newUser})
+        body: JSON.stringify({user
+        })
       })
       .then(response => response.json())
       .then(data => {
@@ -79,8 +70,6 @@ class App extends React.Component {
           }, () => this.props.history.push("/recipes"))
         }
       })
-
-    }
   }
 
   handleLogout = () => {
@@ -93,12 +82,13 @@ class App extends React.Component {
   render() {
   return (
     <div className="App">
+      <Navbar currentUser={this.state.currentUser} logout={this.handleLogout} />
       <main>
         <Switch>
           <Route path="/login" render={(routerProps) => <Login handleLogin={this.handleLogin} />} />
           <Route path="/signup" render={(routerProps) => <Signup handleSignup={this.handleSignup} />} />
-          <Route path="/" component={Home} />
           <Route path="/recipes" component={RecipeList} />
+          <Route path="/" component={Home} />
         </Switch>
       </main>
     </div>
