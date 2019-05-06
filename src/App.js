@@ -7,6 +7,7 @@ import RecipeList from './containers/RecipeList'
 import Login from './containers/Login'
 import Signup from './containers/Signup'
 import Navbar from './components/Navbar'
+import Profile from './components/Profile'
 
 class App extends React.Component {
   state = {
@@ -76,6 +77,19 @@ class App extends React.Component {
     localStorage.removeItem('token')
     this.setState({
       currentUser: null
+    }, () => this.props.history.push("/"))
+  }
+
+  deleteUser = (user) => {
+    fetch(`http://localhost:3005/api/v1/users/${user.id}`, {
+      method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(json => {
+      localStorage.removeItem('token')
+      this.setState({
+        currentUser: null
+      }, () => this.props.history.push("/"))
     })
   }
 
@@ -88,6 +102,7 @@ class App extends React.Component {
           <Route path="/login" render={(routerProps) => <Login handleLogin={this.handleLogin} />} />
           <Route path="/signup" render={(routerProps) => <Signup handleSignup={this.handleSignup} />} />
           <Route path="/recipes" component={RecipeList} />
+          <Route path="/profile" render={(routerProps) => <Profile currentUser={this.state.currentUser} deleteUser={this.deleteUser}/>} />
           <Route path="/" component={Home} />
         </Switch>
       </main>

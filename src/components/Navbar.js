@@ -3,20 +3,28 @@ import { Route, Link} from 'react-router-dom'
 
 const Navbar = (props) => {
   return (
-    <nav>
-    <ul>
-      <li><Link to="/">Home</Link></li>
-      {props.currentUser ? (
-        <Fragment>
-          <li><Link to="/logout" onClick={props.logout}>Logout</Link></li>
-        </Fragment>
-        ) : (
-        <Fragment>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/signup">Signup</Link></li>
-        </Fragment>
-      )}
-      </ul>
+    <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <span className="logo">SOYMATES</span>
+      </div>
+      <div className="navbar-menu is-active">
+        <div className="navbar-start">
+          <Link className="navbar-item" to="/">Home</Link>
+        </div>
+        <div className="navbar-end">
+          {props.currentUser ? (
+            <div className="buttons">
+              <Link className="button is-primary" to="/profile"><strong>My Profile</strong></Link>
+              <Link className="button is-primary" to="/logout" onClick={props.logout}><strong>Logout</strong></Link>
+            </div>
+          ) : (
+            <div className="buttons">
+              <Link className="button is-primary" to="/signup"><strong>Sign up</strong></Link>
+              <Link className="button is-light" to="/login">Login</Link>
+            </div>
+          )}
+        </div>
+      </div>
     </nav>
   )
 }

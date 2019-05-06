@@ -32,7 +32,7 @@ export default class RecipeList extends Component {
 
   render() {
     return(
-      <div>
+      <div className="container">
       <Search handleSearch={this.handleSearch}/>
       {this.state.displayRecipes.map(single_recipe=>
         <RecipeCard recipe={single_recipe} />
