@@ -1,16 +1,18 @@
 import React, {Component} from 'react'
+import { Route, withRouter, Link } from 'react-router-dom'
 
-export default class Home extends Component {
+class Home extends Component {
   render() {
     return(
       <div>
       <h1>Welcome to SoyMates</h1>
       <p> The app that helps match you to the perfect sushi for YOU. </p>
-      <button>Log In</button>
-      <button>New Sushi Lover</button>
+      <Link to="/login" > Log in </Link>
+      <Link to="/signup">Sign up</Link>
       </div>
     )
   }
 }
 
+export default  Home
 //scrolling sushi puns
