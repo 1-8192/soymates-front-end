@@ -82,7 +82,11 @@ class App extends React.Component {
 
   deleteUser = (user) => {
     fetch(`http://localhost:3005/api/v1/users/${user.id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      }
     })
     .then(response => response.json())
     .then(json => {

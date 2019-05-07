@@ -10,7 +10,12 @@ export default class RecipeList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3005/api/v1/recipes/')
+    fetch('http://localhost:3005/api/v1/recipes/', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      }
+    })
     .then(res=>res.json())
     .then(recipeData=>{
       this.setState({

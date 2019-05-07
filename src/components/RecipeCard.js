@@ -9,7 +9,11 @@ class RecipeCard extends React.Component {
   handleClick = () => {
     if (this.state.matched === true) {
       fetch(`http://localhost:3005/api/v1/matches/${this.state.matchId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
+        }
       })
       .then(response => response.json())
       .then(json => {
@@ -24,6 +28,7 @@ class RecipeCard extends React.Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify({match
         })
