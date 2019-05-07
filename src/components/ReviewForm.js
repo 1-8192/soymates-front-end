@@ -4,7 +4,7 @@ export default class ReviewForm extends Component {
   render() {
     return (
       <div>
-        <h3>New Review</h3>
+        <h3><strong>New Review</strong></h3>
         <form onChange={this.props.handleChange} onSubmit={event=>this.props.handleSubmit(event, this.props.reviewStuff)}>
           <label>Title</label>
           <input type="text" name="title" placeholder="Review Title" value={this.props.reviewStuff.title} /><br/>
