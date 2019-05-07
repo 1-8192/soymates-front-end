@@ -30,11 +30,6 @@ class CardBack extends Component {
     let newReviewObj = {...this.state}
     newReviewObj.user_id = crrntUser.id
     delete newReviewObj.reviews
-<<<<<<< HEAD
-=======
-    let newReviewArr = [...this.state.reviews]
-    newReviewArr.push(newReviewObj)
->>>>>>> 5477c46cdd5e35a38789c470decdccecbc1ad29b
     fetch('http://localhost:3005/api/v1/reviews', {
       method: 'POST',
       headers: {

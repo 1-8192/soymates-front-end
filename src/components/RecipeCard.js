@@ -68,15 +68,6 @@ class RecipeCard extends React.Component {
     }
   }
 
-<<<<<<< HEAD
-render() {
-  return (
-    <div className="column is-one-third zoom">
-      <div className="notification sushi-card">
-
-          <CardFront sushi={this.props.recipe} />
-          <CardBack sushi={this.props.recipe} />
-=======
   render() {
     return (
       <div className="column is-one-third zoom">
@@ -85,7 +76,6 @@ render() {
             <CardFront sushi={this.props.recipe} />
             <CardBack user={this.props.currentUser} sushi={this.props.recipe} />
         </div>
->>>>>>> 5477c46cdd5e35a38789c470decdccecbc1ad29b
       </div>
     )
   }

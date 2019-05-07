@@ -59,8 +59,6 @@ export default class RecipeList extends Component {
       })
     }
     })
-<<<<<<< HEAD
-=======
   }
 
   handleSubmit = (event, sushi) => {
@@ -89,7 +87,6 @@ export default class RecipeList extends Component {
   }
 
   render() {
->>>>>>> 5477c46cdd5e35a38789c470decdccecbc1ad29b
     return(
       <div>
       <div className="hero is-light">

@@ -15,25 +15,6 @@ export default class NewSushiContainer extends Component {
     })
   }
 
-<<<<<<< HEAD
-  handleSubmit = (event) => {
-    event.preventDefault()
-    fetch('http://localhost:3005/api/v1/recipes/', {
-      method: 'POST',
-      headers: {
-  		'Content-Type': 'application/json',
-  		'Accept': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem("token")}`
-  	  },
-      body: JSON.stringify(this.state)
-    }).then(response => {
-      return response.json()
-    })
-    event.target.parentElement.parentElement.style.display = 'none'
-  }
-
-=======
->>>>>>> 5477c46cdd5e35a38789c470decdccecbc1ad29b
   clickBuild = (event) => {
     if (event.target.nextElementSibling.className === 'new-sushi') {
       event.target.nextElementSibling.style.display = 'block'
