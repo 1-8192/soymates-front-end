@@ -21,7 +21,7 @@ class CardBack extends Component {
 
   handleSubmit = (event, review_contents) => {
     event.preventDefault()
-    let crrntUser=this.props.user.user
+    let crrntUser=this.props.user
     this.setState({
       title: review_contents.title,
       rating: review_contents.rating,
@@ -30,6 +30,8 @@ class CardBack extends Component {
     let newReviewObj = {...this.state}
     newReviewObj.user_id = crrntUser.id
     delete newReviewObj.reviews
+    let newReviewArr = [...this.state.reviews]
+    newReviewArr.push(newReviewObj)
     fetch('http://localhost:3005/api/v1/reviews', {
       method: 'POST',
       headers: {

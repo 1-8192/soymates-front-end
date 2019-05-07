@@ -44,10 +44,11 @@ class App extends React.Component {
     })
     .then(response => response.json())
     .then(userData => {
+      console.log(userData)
       if (userData.message) {
         alert('Oops. invalid login')
       } else {
-      localStorage.setItem('token', userData.user.jwt)
+      localStorage.setItem('token', userData.jwt)
       this.setState({
         currentUser: userData.user
       }, () => this.props.history.push("/profile"))
@@ -69,7 +70,7 @@ class App extends React.Component {
       })
       .then(response => response.json())
       .then(data => {
-        localStorage.setItem('token', data.user.jwt)
+        localStorage.setItem('token', data.jwt)
         this.setState({
             currentUser: data.user
           }, () => this.props.history.push("/recipes"))
