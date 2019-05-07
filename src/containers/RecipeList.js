@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import RecipeCard from '../components/RecipeCard'
 import Search from '../components/Search'
+import NewSushiContainer from './NewSushiContainer'
 
 export default class RecipeList extends Component {
 
@@ -10,7 +11,7 @@ export default class RecipeList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/recipes/')
+    fetch('http://localhost:3000/api/v1/recipes/')
     .then(res=>res.json())
     .then(recipeData=>{
       this.setState({
@@ -33,10 +34,13 @@ export default class RecipeList extends Component {
   render() {
     return(
       <div>
-      <Search handleSearch={this.handleSearch}/>
-      {this.state.displayRecipes.map(single_recipe=>
-        <RecipeCard recipe={single_recipe} />
-      )}
+      <Search handleSearch={this.handleSearch}/><br/>
+      <NewSushiContainer />
+        <div id="recipe-container">
+          {this.state.displayRecipes.map(single_recipe=>
+            <RecipeCard recipe={single_recipe} />
+          )}
+        </div>
       </div>
     )
   }

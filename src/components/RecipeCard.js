@@ -1,13 +1,19 @@
 import React from 'react'
+import CardFront from './CardFront'
+import CardBack from './CardBack'
 
 const RecipeCard = (props) => {
+
+  const handleClick = (event) => {
+    let card = event.target.parentElement
+    card.classList.toggle('is-flipped')
+  }
+
   return (
-    <div>
-          <h3>{props.recipe.name}</h3>
-          <img className="sushi-card zoom" src={props.recipe.img} />
-          <p>{props.recipe.roll_type}</p>
-          <p>{props.recipe.instructions}</p>
-          </div>
+    <div className="sushi-card" onClick={handleClick}>
+      <CardFront sushi={props.recipe} />
+      <CardBack sushi={props.recipe} />
+    </div>
   )
 }
 
