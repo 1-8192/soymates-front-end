@@ -15,6 +15,7 @@ export default class NewSushiContainer extends Component {
     })
   }
 
+<<<<<<< HEAD
   handleSubmit = (event) => {
     event.preventDefault()
     fetch('http://localhost:3005/api/v1/recipes/', {
@@ -31,6 +32,8 @@ export default class NewSushiContainer extends Component {
     event.target.parentElement.parentElement.style.display = 'none'
   }
 
+=======
+>>>>>>> 5477c46cdd5e35a38789c470decdccecbc1ad29b
   clickBuild = (event) => {
     if (event.target.nextElementSibling.className === 'new-sushi') {
       event.target.nextElementSibling.style.display = 'block'
@@ -46,7 +49,7 @@ export default class NewSushiContainer extends Component {
         <div className="new-sushi">
           <div className="new-sushi-content">
             <span class="close" onClick={this.clickBuild}>&times;</span>
-            <form onChange={this.handleChange} onSubmit={this.handleSubmit} >
+            <form onChange={this.handleChange} onSubmit={event=>this.props.handleSubmit(event, this.state)} >
               <label>Sushi Name</label>
               <input type="text" name="name" value={this.state.name} /><br/>
               <label>Sushi Image</label>

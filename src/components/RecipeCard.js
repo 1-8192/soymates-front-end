@@ -68,6 +68,7 @@ class RecipeCard extends React.Component {
     }
   }
 
+<<<<<<< HEAD
 render() {
   return (
     <div className="column is-one-third zoom">
@@ -75,10 +76,26 @@ render() {
 
           <CardFront sushi={this.props.recipe} />
           <CardBack sushi={this.props.recipe} />
+=======
+  render() {
+    return (
+      <div className="column is-one-third zoom">
+        <div onClick={this.handleClick} className="sushi-card">
+
+            <CardFront sushi={this.props.recipe} />
+            <CardBack user={this.props.currentUser} sushi={this.props.recipe} />
+        </div>
+>>>>>>> 5477c46cdd5e35a38789c470decdccecbc1ad29b
       </div>
-    </div>
-  )
-}
+    )
+  }
 }
 
 export default RecipeCard;
+
+// { this.state.matched === false ?
+// //     <a onClick={this.handleLikeClick} className="button is-danger is-rounded is-hovered is-right">
+// //     Fall in love
+// //   </a> : <a onClick={this.handleLikeClick} className="button is-danger is-rounded is-hovered is-right">
+// //   unmatch
+// // </a>  }

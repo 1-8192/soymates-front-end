@@ -6,7 +6,7 @@ class CardBack extends Component {
 
   state = {
     title: '',
-    rating: null,
+    rating: '',
     body: '',
     recipe_id: this.props.sushi.id,
     user_id: null,
@@ -17,18 +17,24 @@ class CardBack extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log(this.state.title, this.state.body)
   }
 
   handleSubmit = (event, review_contents) => {
     event.preventDefault()
+    let crrntUser=this.props.user.user
     this.setState({
       title: review_contents.title,
       rating: review_contents.rating,
       body: review_contents.body,
     })
     let newReviewObj = {...this.state}
+    newReviewObj.user_id = crrntUser.id
     delete newReviewObj.reviews
+<<<<<<< HEAD
+=======
+    let newReviewArr = [...this.state.reviews]
+    newReviewArr.push(newReviewObj)
+>>>>>>> 5477c46cdd5e35a38789c470decdccecbc1ad29b
     fetch('http://localhost:3005/api/v1/reviews', {
       method: 'POST',
       headers: {
@@ -39,12 +45,20 @@ class CardBack extends Component {
       body: JSON.stringify(newReviewObj)
       }).then(response => {
         return response.json()
+    }).then(rvwJSON=>{
+      this.setState({
+        reviews: newReviewArr,
+        title: '',
+        rating: '',
+        body: ''
+      })
     })
+
   }
 
   clickOpen = (event) => {
     event.target.nextElementSibling.style.display = 'block';
-    fetch('http://localhost:3000/api/v1/reviews')
+    fetch('http://localhost:3005/api/v1/reviews')
     .then(res=>res.json())
     .then(reviewArr=>{
       let recipe_reviews = reviewArr.filter(review=>review.recipe_id===this.state.recipe_id)
