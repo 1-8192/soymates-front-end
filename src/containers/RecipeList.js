@@ -26,6 +26,22 @@ export default class RecipeList extends Component {
     })
   }
 
+  handleSubmit = (event, sushi) => {
+    event.preventDefault()
+    let newSushiObj = sushi
+    fetch('http://localhost:3005/api/v1/recipes/', {
+      method: 'POST',
+      headers: {
+  		'Content-Type': 'application/json',
+  		'Accept': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem("token")}`
+  	  },
+      body: JSON.stringify(newSushiObj)
+    }).then(res=>res.json())
+    // console.log(newSushiObj)
+    event.target.parentElement.parentElement.style.display = 'none'
+  }
+
   handleSearch = (event) => {
     let newArray = this.state.recipes.filter(recipe => {
       return recipe.name.toLowerCase().includes(event.target.value.toLowerCase()) || recipe.roll_type.toLowerCase().includes(event.target.value.toLowerCase()) || recipe.instructions.toLowerCase().includes(event.target.value.toLowerCase())
@@ -42,6 +58,7 @@ export default class RecipeList extends Component {
         <div className="hero-body">
           <div className="container">
             know what you want?<Search handleSearch={this.handleSearch}/>
+            <NewSushiContainer handleSubmit={this.handleSubmit} />
           </div>
         </div>
       </div>
