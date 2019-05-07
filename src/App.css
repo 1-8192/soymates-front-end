@@ -145,3 +145,20 @@
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
 }
+
+html {
+  background: url(./images/bg_pic.jpg) no-repeat center center fixed;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+}
+
+.logo-font-logo {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 35px;
+}
+
+.logo-font {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 25px;
