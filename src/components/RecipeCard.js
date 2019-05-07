@@ -21,7 +21,12 @@ class RecipeCard extends React.Component {
     matchId: null
   }
 
-  handleClick = () => {
+  handleClick = (event) => {
+      let card = event.target.parentElement
+      card.classList.toggle('is-flipped')
+    }
+
+  handleLikeClick = () => {
     if (this.state.matched === true) {
       fetch(`http://localhost:3005/api/v1/matches/${this.state.matchId}`, {
         method: 'DELETE',
@@ -65,18 +70,11 @@ class RecipeCard extends React.Component {
 render() {
   return (
     <div className="column is-one-third zoom">
-      <div className="notification">
-          <h3 className="logo-font">{this.props.recipe.name}</h3>
-          <img className="sushi-card" src={this.props.recipe.img} /><br/>
-            { this.state.matched === false ?
-              <a onClick={this.handleClick} className="button is-danger is-rounded is-hovered is-right">
-              Fall in love
-            </a> : <a onClick={this.handleClick} className="button is-danger is-rounded is-hovered is-right">
-            unmatch
-          </a>  }
-          <p>type: {this.props.recipe.roll_type}</p>
-          <p>preparation: {this.props.recipe.instructions}</p>
-        </div>
+      <div className="notification sushi-card">
+          
+          <CardFront sushi={this.props.recipe} />
+          <CardBack sushi={this.props.recipe} />
+      </div>
     </div>
   )
 }

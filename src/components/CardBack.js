@@ -61,7 +61,7 @@ class CardBack extends Component {
   render() {
     return (
       <div className="card-face card-back" >
-        <h3>{this.props.sushi.name}</h3>
+        <h3 className="logo-font">{this.props.sushi.name}</h3>
         <p>{this.props.sushi.roll_type}</p>
         <p>{this.props.sushi.instructions}</p>
         <button className="btn" onClick={this.clickOpen}>Reviews</button>

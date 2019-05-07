@@ -61,8 +61,6 @@
   transform: rotateY(180deg) scale(1.5);
 }
 
-
-
 .card-front, .card-back {
   position: absolute;
   height: inherit;
@@ -162,3 +160,4 @@ html {
 .logo-font {
   font-family: 'Permanent Marker', cursive;
   font-size: 25px;
+}
