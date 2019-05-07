@@ -73,8 +73,8 @@ class CardBack extends Component {
     return (
       <div className="card-face card-back" >
         <h3 className="logo-font">{this.props.sushi.name}</h3>
-        <p>{this.props.sushi.roll_type}</p>
-        <p>{this.props.sushi.instructions}</p>
+        <p>Type: {this.props.sushi.roll_type}</p>
+        <p>Preparation: {this.props.sushi.instructions}</p>
         <button className="btn" onClick={this.clickOpen}>Reviews</button>
         <div className="reviews">
           <div className="review-content">
@@ -83,7 +83,8 @@ class CardBack extends Component {
                 handleChange={this.handleChange}
                 reviewStuff={this.state}
             /><hr/>
-            {this.state.reviews.map(review=> <ReviewCard review={review} />)}
+          <h2>Roll Reviews</h2>
+            {this.state.reviews.map(review=> <ReviewCard currentUser={this.props.user} review={review} />)}
           </div>
         </div>
       </div>

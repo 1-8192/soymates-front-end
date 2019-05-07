@@ -11,7 +11,8 @@ import Profile from './components/Profile'
 
 class App extends React.Component {
   state = {
-    currentUser: null
+    currentUser: null,
+    userReviews: []
   }
 
   componentDidMount(){
@@ -50,7 +51,8 @@ class App extends React.Component {
       } else {
       localStorage.setItem('token', userData.jwt)
       this.setState({
-        currentUser: userData.user
+        currentUser: userData.user,
+        userReviews: userData.reviews
       }, () => this.props.history.push("/profile"))
     }
   })
@@ -109,7 +111,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/login" render={(routerProps) => <Login handleLogin={this.handleLogin} />} />
           <Route path="/signup" render={(routerProps) => <Signup handleSignup={this.handleSignup} />} />
-          <Route path="/recipes" render={(routerProps) => <RecipeList currentUser={this.state.currentUser} />} />
+          <Route path="/recipes" render={(routerProps) => <RecipeList userReviews={this.state.userReviews} currentUser={this.state.currentUser} />} />
           <Route path="/profile" render={(routerProps) => <Profile currentUser={this.state.currentUser} deleteUser={this.deleteUser}/>} />
           <Route path="/" component={Home} />
         </Switch>

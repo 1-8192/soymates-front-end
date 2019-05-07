@@ -161,3 +161,8 @@ html {
   font-family: 'Permanent Marker', cursive;
   font-size: 25px;
 }
+
+.img-frame {
+    padding:5px;
+    border:8px solid rgb(239, 239, 239);
+  }
