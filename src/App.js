@@ -101,7 +101,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/login" render={(routerProps) => <Login handleLogin={this.handleLogin} />} />
           <Route path="/signup" render={(routerProps) => <Signup handleSignup={this.handleSignup} />} />
-          <Route path="/recipes" component={RecipeList} />
+          <Route path="/recipes" render={(routerProps) => <RecipeList currentUser={this.state.currentUser} />} />
           <Route path="/profile" render={(routerProps) => <Profile currentUser={this.state.currentUser} deleteUser={this.deleteUser}/>} />
           <Route path="/" component={Home} />
         </Switch>

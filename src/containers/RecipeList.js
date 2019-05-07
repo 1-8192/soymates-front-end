@@ -39,9 +39,9 @@ export default class RecipeList extends Component {
           </div>
         </div>
       </div>
-    <div className="container is-centered">
+    <div className="columns is-multiline is-3-mobile is-3-desktop">
       {this.state.displayRecipes.map(single_recipe=>
-        <RecipeCard recipe={single_recipe} />
+        <RecipeCard currentUser={this.props.currentUser} recipe={single_recipe} />
       )}
     </div>
       </div>
