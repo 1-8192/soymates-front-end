@@ -19,6 +19,7 @@ class App extends React.Component {
       fetch("http://localhost:3005/api/v1/current_user", {
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem("token")}`
         }
       })
@@ -36,17 +37,22 @@ class App extends React.Component {
     fetch("http://localhost:3005/api/v1/login", {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify({user})
     })
     .then(response => response.json())
     .then(userData => {
-      localStorage.setItem('token', userData.jwt)
+      if (userData.message) {
+        alert('Oops. invalid login')
+      } else {
+      localStorage.setItem('token', userData.user.jwt)
       this.setState({
         currentUser: userData.user
-      }, () => this.props.history.push("/recipes"))
-    })
+      }, () => this.props.history.push("/profile"))
+    }
+  })
   }
 
   handleSignup = (event, user) => {
@@ -56,21 +62,18 @@ class App extends React.Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({user
         })
       })
       .then(response => response.json())
       .then(data => {
-        if (data.message) {
-          alert(data.message)
-        } else {
-          localStorage.setItem('token', data.jwt)
-          this.setState({
+        localStorage.setItem('token', data.user.jwt)
+        this.setState({
             currentUser: data.user
           }, () => this.props.history.push("/recipes"))
-        }
-      })
+        })
   }
 
   handleLogout = () => {

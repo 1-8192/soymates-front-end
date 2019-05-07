@@ -48,6 +48,7 @@ class RecipeCard extends React.Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify({match
@@ -71,7 +72,7 @@ render() {
   return (
     <div className="column is-one-third zoom">
       <div className="notification sushi-card">
-          
+
           <CardFront sushi={this.props.recipe} />
           <CardBack sushi={this.props.recipe} />
       </div>

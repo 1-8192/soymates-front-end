@@ -4,7 +4,7 @@ import { Route, Link} from 'react-router-dom'
 const Navbar = (props) => {
   return (
     <nav className="navbar is-fixed-top is-mobile" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
+      <div className="navbar-brand">
         <span className="logo-font-logo">SOYMATES</span>
       </div>
       <div className="navbar-menu is-active">

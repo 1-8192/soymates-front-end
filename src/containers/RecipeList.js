@@ -10,21 +10,26 @@ export default class RecipeList extends Component {
     displayRecipes: []
   }
 
-  componentDidMount() {
-    fetch('http://localhost:3005/api/v1/recipes/', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
-      }
-    })
-    .then(res=>res.json())
-    .then(recipeData=>{
-      this.setState({
-        recipes: recipeData,
-        displayRecipes: recipeData
-      })
-    })
-  }
+  // componentDidMount() {
+  //   fetch('http://localhost:3005/api/v1/recipes/', {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json',
+  //       'Authorization': `Bearer ${localStorage.getItem("token")}`
+  //     }
+  //   })
+  //   .then(res=>res.json())
+  //   .then(recipeData=>{
+  //     if (recipeData.message) {
+  //       alert('Oops. you are not logged in')
+  //     } else {
+  //       this.setState({
+  //       recipes: recipeData,
+  //       displayRecipes: recipeData
+  //     })
+  //   }
+  //   })
+  // }
 
   handleSearch = (event) => {
     let newArray = this.state.recipes.filter(recipe => {
@@ -36,6 +41,24 @@ export default class RecipeList extends Component {
   }
 
   render() {
+    fetch('http://localhost:3005/api/v1/recipes/', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    .then(res=>res.json())
+    .then(recipeData=>{
+      if (recipeData.message) {
+        alert('Oops. you are not logged in')
+      } else {
+        this.setState({
+        recipes: recipeData,
+        displayRecipes: recipeData
+      })
+    }
+    })
     return(
       <div>
       <div className="hero is-light">

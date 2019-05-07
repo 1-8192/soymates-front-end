@@ -29,7 +29,7 @@ class CardBack extends Component {
     })
     let newReviewObj = {...this.state}
     delete newReviewObj.reviews
-    fetch('http://localhost:3000/api/v1/reviews', {
+    fetch('http://localhost:3005/api/v1/reviews', {
       method: 'POST',
       headers: {
     		'Content-Type': 'application/json',

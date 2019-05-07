@@ -17,7 +17,7 @@ export default class NewSushiContainer extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    fetch('http://localhost:3000/api/v1/recipes/', {
+    fetch('http://localhost:3005/api/v1/recipes/', {
       method: 'POST',
       headers: {
   		'Content-Type': 'application/json',
