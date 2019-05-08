@@ -53,7 +53,7 @@ class App extends React.Component {
       this.setState({
         currentUser: userData.user,
         userReviews: userData.reviews
-      }, () => this.props.history.push("/profile"))
+      }, () => this.props.history.push("/recipes"))
     }
   })
   }
