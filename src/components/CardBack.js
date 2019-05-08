@@ -158,16 +158,10 @@ class CardBack extends Component {
             <span className="close" onClick={this.clickHandler}>&times;</span>
             <ReviewForm handleSubmit={this.handleReviewSubmit}
                 handleChange={this.handleChange}
-<<<<<<< HEAD
-                reviewStuff={this.state} /><hr/>
-
-            {this.state.reviews.map(review=> <ReviewCard currentUser={this.props.user} review={review} />)}
-=======
                 reviewStuff={this.state}
             /><hr/>
           <h2>Roll Reviews</h2>
             {this.state.reviews.map(review=> <ReviewCard handleEditSubmit={this.handleEditSubmit} handleDeleteClick={this.handleDeleteClick} currentUser={this.props.user} review={review} />)}
->>>>>>> master
           </div>
         </div>
         <div className="edit-sushi">
