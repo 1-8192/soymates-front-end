@@ -74,7 +74,10 @@ class RecipeCard extends React.Component {
         <div onClick={this.handleClick} className="sushi-card">
 
             <CardFront sushi={this.props.recipe} />
-            <CardBack userReviews={this.props.userReviews} user={this.props.currentUser} sushi={this.props.recipe} />
+            <CardBack userReviews={this.props.userReviews}
+            user={this.props.currentUser}
+            sushi={this.props.recipe}
+            handleDelete={this.props.handleDelete} />
         </div>
       </div>
     )

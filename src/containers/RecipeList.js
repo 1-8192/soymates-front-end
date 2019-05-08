@@ -53,14 +53,32 @@ export default class RecipeList extends Component {
       body: JSON.stringify(newSushiObj)
     }).then(res=>res.json(
     ))
-    .then(newSushi => {
+
       let newDisplayArray = [...this.state.recipes]
-      newDisplayArray.push(newSushi)
+      newDisplayArray.push(newSushiObj)
       this.setState({
-        recipes: newDisplayArray
+        displayRecipes: newDisplayArray
+      })
+
+    event.target.parentElement.parentElement.style.display = 'none'
+  }
+
+  handleDelete = (event, id) => {
+    console.log(event.target.parentElement.parentElement.parentElement);
+    let newDisplayArray = [...this.state.recipes];
+    let updatedSushiArray = newDisplayArray.filter(recipe=>recipe.id!==id);
+    fetch(`http://localhost:3005/api/v1/recipes/${id}`, {
+      method: 'DELETE',
+      headers: {
+  		'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem("token")}`
+  	  }
+    }).then(res=>res.json())
+    .then(response=>{
+      this.setState({
+        displayRecipes: updatedSushiArray
       })
     })
-    event.target.parentElement.parentElement.style.display = 'none'
   }
 
   handleSearch = (event) => {
@@ -84,9 +102,12 @@ export default class RecipeList extends Component {
           </div>
         </div>
       </div>
-    <div className="columns is-multiline is-3-mobile is-3-desktop">
+    <div className="columns  is-multiline is-3-mobile is-3-desktop">
       {this.state.displayRecipes.map(single_recipe=>
-        <RecipeCard userReviews={this.props.userReviews} currentUser={this.props.currentUser} recipe={single_recipe} />
+        <RecipeCard userReviews={this.props.userReviews}
+        currentUser={this.props.currentUser}
+        recipe={single_recipe}
+        handleDelete={this.handleDelete} />
       )}
     </div>
       </div>

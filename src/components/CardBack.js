@@ -10,7 +10,11 @@ class CardBack extends Component {
     body: '',
     recipe_id: this.props.sushi.id,
     user_id: null,
-    reviews: []
+    reviews: [],
+    name: this.props.sushi.name,
+    img: this.props.sushi.img,
+    roll_type: this.props.sushi.roll_type,
+    instructions: this.props.sushi.instructions
   }
 
   handleChange = (event)=>{
@@ -19,7 +23,7 @@ class CardBack extends Component {
     })
   }
 
-  handleSubmit = (event, review_contents) => {
+  handleReviewSubmit = (event, review_contents) => {
     event.preventDefault()
     let crrntUser=this.props.user
     this.setState({
@@ -53,8 +57,28 @@ class CardBack extends Component {
 
   }
 
-  clickOpen = (event) => {
-    event.target.nextElementSibling.style.display = 'block';
+  handleEditSushi = (event, data) => {
+    // event.preventDefault()
+    let sushi_id = this.props.sushi.id
+    let sushi = {
+      name: data.name,
+      img: data.img,
+      roll_type: data.roll_type,
+      instructions: data.instructions
+    }
+    fetch(`http://localhost:3005/api/v1/recipes/${sushi_id}`, {
+      method: 'PATCH',
+      headers: {
+  		'Content-Type': 'application/json',
+  		'Accept': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem("token")}`
+  	  },
+      body: JSON.stringify(sushi)
+    }).then(res=>res.json())
+    event.target.parentElement.parentElement.style.display = 'none'
+  }
+
+  getReviews = () => {
     fetch('http://localhost:3005/api/v1/reviews')
     .then(res=>res.json())
     .then(reviewArr=>{
@@ -65,8 +89,17 @@ class CardBack extends Component {
     })
   }
 
-  clickClose = (event) => {
-    event.target.parentElement.parentElement.style.display = 'none'
+  clickHandler = (event) => {
+    if(event.target.className === 'review-btn') {
+      event.target.nextElementSibling.style.display = 'block';
+      this.getReviews()
+    } else if(event.target.className === 'close') {
+      event.target.parentElement.parentElement.style.display = 'none'
+    } else if(event.target.className === 'edit-btn') {
+      event.target.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.style.display = 'block';
+    } else if(event.target.className === 'delete-btn') {
+      this.props.handleDelete(event, this.state.recipe_id)
+    }
   }
 
   render() {
@@ -75,16 +108,33 @@ class CardBack extends Component {
         <h3 className="logo-font">{this.props.sushi.name}</h3>
         <p>Type: {this.props.sushi.roll_type}</p>
         <p>Preparation: {this.props.sushi.instructions}</p>
-        <button className="btn" onClick={this.clickOpen}>Reviews</button>
+        <button className="edit-btn" onClick={this.clickHandler}>Edit Sushi</button>
+        <button className="delete-btn" onClick={this.clickHandler}>Delete Sushi</button>
+        <button className="review-btn" onClick={this.clickHandler}>Reviews</button>
         <div className="reviews">
           <div className="review-content">
-            <span class="close" onClick={this.clickClose}>&times;</span>
-            <ReviewForm handleSubmit={this.handleSubmit}
+            <span className="close" onClick={this.clickHandler}>&times;</span>
+            <ReviewForm handleSubmit={this.handleReviewSubmit}
                 handleChange={this.handleChange}
-                reviewStuff={this.state}
-            /><hr/>
-          <h2>Roll Reviews</h2>
+                reviewStuff={this.state} /><hr/>
+
             {this.state.reviews.map(review=> <ReviewCard currentUser={this.props.user} review={review} />)}
+          </div>
+        </div>
+        <div className="edit-sushi">
+          <div className="edit-sushi-content">
+            <span class="close" onClick={this.clickHandler}>&times;</span>
+            <form onChange={this.handleChange} onSubmit={event=>this.handleEditSushi(event, this.state)} >
+              <label>Sushi Name</label>
+              <input type="text" name="name" value={this.state.name} /><br/>
+              <label>Sushi Image</label>
+              <input type="text" name="img" value={this.state.img} /><br/>
+              <label>Sushi Roll Type</label>
+              <input type="text" name="roll_type" value={this.state.roll_type} /><br/>
+              <label>Sushi Instructions</label>
+              <input type="text" name="instructions" value={this.state.instructions} />
+              <input type="submit" />
+            </form>
           </div>
         </div>
       </div>
@@ -93,3 +143,5 @@ class CardBack extends Component {
 }
 
 export default CardBack;
+
+// <h2>Roll Reviews</h2>
