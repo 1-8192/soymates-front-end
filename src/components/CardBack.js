@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ReviewCard from './ReviewCard'
 import ReviewForm from './ReviewForm'
+import ReviewEditForm from './ReviewEditForm'
 
 class CardBack extends Component {
 
@@ -102,6 +103,47 @@ class CardBack extends Component {
     }
   }
 
+  handleDeleteClick = (review) => {
+    fetch(`http://localhost:3005/api/v1/reviews/${review.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    .then(response => response.json())
+    .then(json => {
+        let newArray = this.state.reviews.filter(singleReview => review.id !== singleReview.id)
+        this.setState({
+          reviews: newArray
+        })
+      })
+    }
+
+    handleEditSubmit = (event, editedReview) => {
+      event.preventDefault()
+      fetch(`http://localhost:3005/api/v1/reviews/${editedReview.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify({
+          title: editedReview.title,
+          rating: editedReview.rating,
+          body: editedReview.body
+        })
+      })
+      .then(response => response.json())
+      .then(json => {
+        let newReviewArr = this.state.reviews.filter(review => review.id !== json.id)
+        newReviewArr.push(json)
+        this.setState({
+          reviews: newReviewArr
+        })
+      })
+    }
+
   render() {
     return (
       <div className="card-face card-back" >
@@ -116,9 +158,16 @@ class CardBack extends Component {
             <span className="close" onClick={this.clickHandler}>&times;</span>
             <ReviewForm handleSubmit={this.handleReviewSubmit}
                 handleChange={this.handleChange}
+<<<<<<< HEAD
                 reviewStuff={this.state} /><hr/>
 
             {this.state.reviews.map(review=> <ReviewCard currentUser={this.props.user} review={review} />)}
+=======
+                reviewStuff={this.state}
+            /><hr/>
+          <h2>Roll Reviews</h2>
+            {this.state.reviews.map(review=> <ReviewCard handleEditSubmit={this.handleEditSubmit} handleDeleteClick={this.handleDeleteClick} currentUser={this.props.user} review={review} />)}
+>>>>>>> master
           </div>
         </div>
         <div className="edit-sushi">
