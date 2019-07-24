@@ -21,7 +21,7 @@ Backend API utilizes PostgresSQL 11, which can be downloaded [here](https://www.
 * JWT
 * Bulma
 
-### Author
+### Authors
 * Allesandro Allegranzi
 * Marcus Killebrew [killebrew.biz@gmail.com](mailto:killebrew.biz@gmail.com)
 
