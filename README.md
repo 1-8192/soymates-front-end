@@ -2,7 +2,7 @@
 
 SoyMates is a sushi recipe/review application. You can create an account and login. Once logged in, you can filter existing recipes by name or roll-type. You can also add your own sushi recipes. Each sushi "card" provides a description, as well as an option to leave a review. 
 
-This is the frontend for the project. Check out the backend [here](https://github.com/1-8192/soymates-front-end "SoyMates Backend").
+This is the frontend for the project. Check out the backend [here](https://github.com/1-8192/soymates-back-end "SoyMates Backend").
 
 ### Demo
 [SoyMates](https://youtu.be/QZX2q7gcDlA)
